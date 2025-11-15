@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) and other AI assistants when working with code in this repository.
 
 ## Project Overview
 
@@ -8,7 +8,120 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Technology Stack:** Flutter 3.x, Dart, SQLite (sqflite), Provider/Riverpod for state management, mobile_scanner for barcode scanning, dio for HTTP, Open Food Facts API integration.
 
-**Project Status:** Early development phase - currently in specification and planning stage. The development plan has been created but implementation has not yet begun.
+**Project Status (as of November 15, 2025):** Planning phase complete, implementation not yet started.
+
+## Current Repository State
+
+### What Exists
+- ✅ **Comprehensive specifications** for all 6 sprints (Sprint 0-5) in `docs/specs/`
+- ✅ **Development plan** with detailed architecture in `docs/dev-plan.md`
+- ✅ **Git repository** with `main` and `develop` branches
+- ✅ **License** (Apache 2.0) and **README**
+- ✅ **Flutter-specific .gitignore** configuration
+
+### What Needs to Be Created
+- ❌ Flutter project scaffolding (`flutter create` not yet run)
+- ❌ `pubspec.yaml` with dependencies
+- ❌ Source code directories (`lib/`, `test/`, etc.)
+- ❌ Dev container configuration (`.devcontainer/`)
+- ❌ CI/CD pipeline configuration
+- ❌ Any implementation code
+
+### Next Steps for Implementation
+1. **Start with Sprint 0** (see `docs/specs/sprint-0-setup.md`)
+2. Initialize Flutter project structure
+3. Set up dev container environment
+4. Configure dependencies in pubspec.yaml
+5. Set up CI/CD pipeline
+6. Begin Sprint 1 implementation
+
+## AI Assistant Guidelines
+
+### Before Starting Any Implementation
+1. **Read the specification first**: Always check `docs/specs/` for the relevant sprint spec
+2. **Follow spec-driven development**: Specifications are authoritative - implement what's specified
+3. **Check acceptance criteria**: Each spec has clear acceptance criteria that must be met
+4. **Review architecture**: Understand the layered architecture pattern before coding
+
+### When Implementing Features
+1. **Start with tests**: Write unit tests based on specifications before implementation (TDD)
+2. **Follow the structure**: Adhere to the defined project structure (presentation/domain/data layers)
+3. **One feature at a time**: Complete one user story/feature before moving to the next
+4. **Update documentation**: If implementation differs from specs, update the specs and this file
+
+### Code Quality Standards
+- **Formatting**: Line length 100 characters, use trailing commas
+- **Linting**: Follow `package:flutter_lints/flutter.yaml` rules
+- **Testing**: Maintain 80%+ test coverage for data and domain layers
+- **Documentation**: Add dartdoc comments for public APIs
+- **Error handling**: Always handle errors gracefully with user-friendly messages
+
+### Common Patterns to Follow
+- **Repository pattern**: All data access goes through repositories
+- **Provider for state**: Use Provider/Riverpod, not setState in business logic
+- **Offline-first**: Cache API responses in SQLite for offline access
+- **Loading states**: Handle loading, success, and error states consistently across UI
+
+## Specification Documents
+
+All feature specifications are located in `docs/specs/`. Each sprint has a detailed specification document:
+
+### Sprint 0: Project Setup (`sprint-0-setup.md`)
+**Goal**: Establish development infrastructure
+- Flutter project initialization
+- Dev container configuration
+- CI/CD pipeline (GitHub Actions)
+- Linting and code quality tools
+- **Start here** if beginning implementation
+
+### Sprint 1: Pet Management (`sprint-1-pet-management.md`)
+**Goal**: Core pet profile CRUD operations
+- Pet model and database schema
+- Pet list screen with add/edit/delete
+- Photo capture and storage
+- Pet repository with SQLite
+- Comprehensive unit and widget tests
+
+### Sprint 2: Barcode Scanner (`sprint-2-barcode-scanner.md`)
+**Goal**: Barcode scanning and product integration
+- Camera-based barcode scanner
+- Open Food Facts API integration
+- Product caching in SQLite
+- Manual product entry fallback
+- Error handling for API failures
+
+### Sprint 3: Feeding Logs (`sprint-3-feeding-logs.md`)
+**Goal**: Track feeding sessions and ratings
+- Feeding log data model
+- Log entry creation with pet/product selection
+- Preference rating system (Love/Like/Neutral/Dislike)
+- Feeding history view
+- Edit and delete functionality
+
+### Sprint 4: Analytics Dashboard (`sprint-4-analytics.md`)
+**Goal**: Visualize preference trends
+- Analytics screen with charts
+- Brand preference analysis
+- Flavor/ingredient analysis
+- Protein source preferences
+- Time-based trend visualization
+
+### Sprint 5: Data Export & Polish (`sprint-5-polish.md`)
+**Goal**: Export functionality and UI polish
+- Export to JSON/CSV formats
+- Import data functionality
+- UI/UX improvements
+- Performance optimization
+- App icon and splash screen
+
+### Specification Structure
+Each spec includes:
+- **User Stories**: What users need to accomplish
+- **Technical Requirements**: Detailed implementation requirements
+- **Acceptance Criteria**: Testable conditions for completion
+- **Data Models**: Exact field definitions
+- **UI Mockups/Descriptions**: Visual guidance
+- **Testing Requirements**: What must be tested
 
 ## Development Environment
 
@@ -275,9 +388,108 @@ flutter test --coverage
 - Consider tablet layouts for larger screens
 - Provide meaningful error messages to users
 
+### Security & Privacy Considerations
+- **No authentication required**: App is local-first, no user accounts
+- **Local data only**: All pet and feeding data stored in local SQLite database
+- **API keys**: Open Food Facts API is public, no keys required
+- **Photo storage**: Pet photos stored in app's local directory
+- **No sensitive data**: App doesn't handle payment info or personal identification
+- **Future cloud sync**: When implemented, use OAuth 2.0 for Dropbox/Drive (Sprint 6+)
+
+### Performance Best Practices
+- **Lazy loading**: Load images and data on demand
+- **Database indexing**: Use indexes for frequently queried columns
+- **Caching**: Cache API responses to reduce network calls
+- **Image optimization**: Compress photos before storage
+- **Pagination**: Implement for long lists (feeding logs, analytics)
+
+### Accessibility Requirements
+- **Screen reader support**: Provide semantic labels for all interactive elements
+- **Color contrast**: Meet WCAG AA standards (4.5:1 for text)
+- **Touch targets**: Minimum 48x48dp for interactive elements
+- **Text scaling**: Support dynamic text sizing
+- **Navigation**: Ensure keyboard navigation works (for web/desktop)
+
+## Quick Reference for AI Assistants
+
+### Starting a New Sprint Implementation
+```bash
+# 1. Read the sprint specification
+cat docs/specs/sprint-X-name.md
+
+# 2. Create feature branch
+git checkout develop
+git pull origin develop
+git checkout -b feature/sprint-X-name
+
+# 3. Follow TDD: Write tests first, then implement
+# 4. Commit regularly with conventional commit messages
+# 5. Push and create PR when ready
+```
+
+### Adding a New Dependency
+```yaml
+# In pubspec.yaml, add under dependencies:
+dependencies:
+  flutter:
+    sdk: flutter
+  package_name: ^version  # Add here
+
+# Then run:
+flutter pub get
+```
+
+### Creating a New Feature Following Architecture
+```
+1. Domain Layer (lib/domain/)
+   - Create entity class (e.g., pet.dart)
+   - Create repository interface (e.g., pet_repository.dart)
+
+2. Data Layer (lib/data/)
+   - Create data model with serialization (e.g., pet_model.dart)
+   - Implement repository (e.g., pet_repository_impl.dart)
+   - Create/update database service if needed
+
+3. Presentation Layer (lib/presentation/)
+   - Create provider for state management
+   - Create screen widgets
+   - Create reusable components
+
+4. Tests (test/)
+   - Unit tests for repositories and services
+   - Widget tests for UI components
+   - Integration tests for user flows
+```
+
+### Common Troubleshooting
+
+**Issue**: `flutter` command not found
+- **Solution**: Install Flutter SDK or ensure it's in PATH
+
+**Issue**: Dependencies not resolving
+- **Solution**: `flutter pub get` or `flutter pub upgrade`
+
+**Issue**: Build errors after adding dependencies
+- **Solution**: `flutter clean && flutter pub get`
+
+**Issue**: Tests failing
+- **Solution**: Check test coverage with `flutter test --coverage` and review specs
+
+**Issue**: Hot reload not working
+- **Solution**: Try hot restart (Shift+R) or full rebuild
+
 ## Key Resources
 
 - **Development Plan**: [docs/dev-plan.md](docs/dev-plan.md) - Comprehensive development guide with architecture details, sprint planning, and specifications
+- **Sprint Specifications**: [docs/specs/](docs/specs/) - Detailed specifications for each sprint
+- **Specification Index**: [docs/specs/README.md](docs/specs/README.md) - Overview of all specifications
 - **Flutter Docs**: https://docs.flutter.dev/
 - **Open Food Facts API**: https://world.openfoodfacts.org/data
 - **SQLite Flutter Guide**: https://docs.flutter.dev/cookbook/persistence/sqlite
+- **Provider Package**: https://pub.dev/packages/provider
+- **Mobile Scanner Package**: https://pub.dev/packages/mobile_scanner
+
+---
+
+**Last Updated**: November 15, 2025
+**For Questions**: Refer to specs in `docs/specs/` or development plan in `docs/dev-plan.md`
