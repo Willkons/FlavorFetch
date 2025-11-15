@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../presentation/screens/home/home_screen.dart';
+import '../presentation/screens/pet_list/pet_list_screen.dart';
 
 /// App routing configuration
 class AppRoutes {
@@ -16,10 +16,11 @@ class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case home:
+      case petList:
         return MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
+          builder: (_) => const PetListScreen(),
         );
-      // TODO: Add other routes as screens are implemented
+      // TODO: Add other routes as screens are implemented in future sprints
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
