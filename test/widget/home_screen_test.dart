@@ -41,26 +41,28 @@ void main() {
       expect(find.text('Analytics'), findsOneWidget);
     });
 
-    testWidgets('should show snackbar when button is pressed',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: HomeScreen(),
-        ),
-      );
+    testWidgets(
+      'should show snackbar when button is pressed',
+      (WidgetTester tester) async {
+        await tester.pumpWidget(
+          const MaterialApp(
+            home: HomeScreen(),
+          ),
+        );
 
-      // Tap the Pet Management button
-      await tester.tap(find.text('Pet Management'));
-      await tester.pump();
+        // Tap the Pet Management button
+        await tester.tap(find.text('Pet Management'));
+        await tester.pump();
 
-      // Wait for snackbar animation
-      await tester.pump(const Duration(milliseconds: 100));
+        // Wait for snackbar animation
+        await tester.pump(const Duration(milliseconds: 100));
 
-      expect(
-        find.text('Pet Management - Coming in future sprints'),
-        findsOneWidget,
-      );
-    });
+        expect(
+          find.text('Pet Management - Coming in future sprints'),
+          findsOneWidget,
+        );
+      },
+    );
 
     testWidgets('should display pet icon', (WidgetTester tester) async {
       await tester.pumpWidget(

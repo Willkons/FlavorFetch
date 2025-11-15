@@ -28,13 +28,17 @@ class HomeScreen extends StatelessWidget {
             Text(
               'Track your pet\'s food preferences',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
-                  ),
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+              ),
             ),
             const SizedBox(height: 48),
             _buildPlaceholderButton(context, 'Pet Management', Icons.pets),
             const SizedBox(height: 16),
-            _buildPlaceholderButton(context, 'Scan Barcode', Icons.qr_code_scanner),
+            _buildPlaceholderButton(
+              context,
+              'Scan Barcode',
+              Icons.qr_code_scanner,
+            ),
             const SizedBox(height: 16),
             _buildPlaceholderButton(context, 'Feeding Logs', Icons.restaurant),
             const SizedBox(height: 16),
